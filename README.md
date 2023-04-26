@@ -25,12 +25,24 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 ![Imágen 1](images/part1/part1-vm-basic-config.png)
 
+![](img/img.png)
+
+![](img/img_2.png)
+
+![](img/img_4.png)
+
 2. Para conectarse a la VM use el siguiente comando, donde las `x` las debe remplazar por la IP de su propia VM (Revise la sección "Connect" de la virtual machine creada para tener una guía más detallada).
 
     `ssh scalability_lab@xxx.xxx.xxx.xxx`
 
+![img.png](img/imagen.png)
+
 3. Instale node, para ello siga la sección *Installing Node.js and npm using NVM* que encontrará en este [enlace](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/).
+![img_1.png](img/img_1.png)
+
+![img_2.png](img/imagen2.png)
 4. Para instalar la aplicación adjunta al Laboratorio, suba la carpeta `FibonacciApp` a un repositorio al cual tenga acceso y ejecute estos comandos dentro de la VM:
+
 
     `git clone <your_repo>`
 
@@ -38,29 +50,50 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
     `npm install`
 
+![img_3.png](img/img_3.png)
+
 5. Para ejecutar la aplicación puede usar el comando `npm FibinacciApp.js`, sin embargo una vez pierda la conexión ssh la aplicación dejará de funcionar. Para evitar ese compartamiento usaremos *forever*. Ejecute los siguientes comando dentro de la VM.
 
     ` node FibonacciApp.js`
+
+![img_4.png](img/imagen4.png)
 
 6. Antes de verificar si el endpoint funciona, en Azure vaya a la sección de *Networking* y cree una *Inbound port rule* tal como se muestra en la imágen. Para verificar que la aplicación funciona, use un browser y user el endpoint `http://xxx.xxx.xxx.xxx:3000/fibonacci/6`. La respuesta debe ser `The answer is 8`.
 
 ![](images/part1/part1-vm-3000InboudRule.png)
 
+![img_5.png](img/img_5.png)
+
+![img_6.png](img/img_6.png)
+
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
     * 1000000
+      ![img_7.png](img/img_7.png)
     * 1010000
+      ![img_8.png](img/img_8.png)
     * 1020000
+      ![img_9.png](img/img_9.png)
     * 1030000
+      ![img_14.png](img/img_14.png)
     * 1040000
+      ![img_11.png](img/img_11.png)
     * 1050000
+      ![img_12.png](img/img_12.png)
     * 1060000
+      ![img_15.png](img/img_15.png)
     * 1070000
+      ![img_16.png](img/img_16.png)
     * 1080000
-    * 1090000    
+      ![img_17.png](img/img_17.png)
+    * 1090000
+      ![img_13.png](img/img_13.png)
 
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
 ![Imágen 2](images/part1/part1-vm-cpu.png)
+
+![img_18.png](img/img_18.png)
+
 
 9. Ahora usaremos Postman para simular una carga concurrente a nuestro sistema. Siga estos pasos.
     * Instale newman con el comando `npm install newman -g`. Para conocer más de Newman consulte el siguiente [enlace](https://learning.getpostman.com/docs/postman/collection-runs/command-line-integration-with-newman/).
