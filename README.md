@@ -68,25 +68,25 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
     * 1000000
-      ![img_7.png](img/img_7.png)
+      ![](img/img_7.png)
     * 1010000
-      ![img_8.png](img/img_8.png)
+      ![](img/img_8.png)
     * 1020000
-      ![img_9.png](img/img_9.png)
+      ![](img/img_9.png)
     * 1030000
-      ![img_14.png](img/img_14.png)
+      ![](img/img_14.png)
     * 1040000
-      ![img_11.png](img/img_11.png)
+      ![](img/img_11.png)
     * 1050000
-      ![img_12.png](img/img_12.png)
+      ![](img/img_12.png)
     * 1060000
-      ![img_15.png](img/img_15.png)
+      ![](img/img_15.png)
     * 1070000
-      ![img_16.png](img/img_16.png)
+      ![](img/img_16.png)
     * 1080000
-      ![img_17.png](img/img_17.png)
+      ![](img/img_17.png)
     * 1090000
-      ![img_13.png](img/img_13.png)
+      ![](img/img_13.png)
 
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
@@ -112,47 +112,47 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 ![Imágen 3](images/part1/part1-vm-resize.png)
 
 11. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
-    ![img_1.png](p1.png)
+    ![](img/p1.png)
 
 * 1000000
 
-![img_2.png](p2.png)
+![](img/p2.png)
 
 * 1010000
 
-![img_3.png](P3.png)
+![](img/P3.png)
 
 * 1020000
 
-![img_4.png](p4.png)
+![](img/p4.png)
 
 * 1030000
 
-![img_5.png](p5.png)
+![](img/p5.png)
 
 * 1040000
 
-![img_6.png](p6.png)
+![](img/p6.png)
 
 * 1050000
 
-![img_7.png](p7.png)
+![](img/p7.png)
 
 * 1060000
 
-![img_8.png](p8.png)
+![](img/p8.png)
 
 * 1070000
 
-![img_9.png](p9.png)
+![](img/p9.png)
 
 * 1080000
 
-![img_10.png](p10.png)
+![](img/p10.png)
 
 * 1090000
 
-![img_11.png](p11.png)
+![](img/p11.png)
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
 
 **RTA:** Se puede Considerar que si cumple un requerimiento funcional, debido a que se ve una mejora de tiempo considerable, de igual manera hubo disminución en los errores de scripts en postman de 5 a 4.
@@ -184,34 +184,34 @@ Antes de continuar puede eliminar el grupo de recursos anterior para evitar gast
 
 ![](images/part2/part2-lb-create.png)
 
-![img_12.png](p12.png)
+![](img/p12.png)
 
-![img_13.png](p13.png)
+![](img/p13.png)
 
 
 2. A continuación cree un *Backend Pool*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-bp-create.png)
 
-![img_14.png](p14.png)
+![](img/p14.png)
 
 3. A continuación cree un *Health Probe*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-hp-create.png)
 
-![img_15.png](p15.png)
+![](img/p15.png)
 
 4. A continuación cree un *Load Balancing Rule*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-lbr-create.png)
 
-![img_16.png](p16.png)
+![](img/p16.png)
 
 5. Cree una *Virtual Network* dentro del grupo de recursos, guiese con la siguiente imágen.
 
 ![](images/part2/part2-vn-create.png)
 
-![img_17.png](p17.png)
+![](img/p17.png)
 
 #### Crear las maquinas virtuales (Nodos)
 
@@ -251,7 +251,7 @@ forever start FibonacciApp.js
 
 Realice este proceso para las 3 VMs, por ahora lo haremos a mano una por una, sin embargo es importante que usted sepa que existen herramientas para aumatizar este proceso, entre ellas encontramos Azure Resource Manager, OsDisk Images, Terraform con Vagrant y Paker, Puppet, Ansible entre otras.
 
-![img_18.png](p18.png)
+![](img/p18.png)
 
 #### Probar el resultado final de nuestra infraestructura
 
@@ -277,33 +277,33 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 
 * VM1-r1
 
-![img_19.png](img_19.png)
+![](img/img_19.png)
 
 * VM1-r2
 
-![img_20.png](img_20.png)
+![](img/img_20.png)
 
 * VM2-r1
 
-![img_21.png](img_21.png)
+![](img/img_21.png)
 
 * VM2-r2
 
-![img_22.png](img_22.png)
+![](img/img_22.png)
 
 * VM3-r1
 
-![img_23.png](img_23.png)
+![](img/img_23.png)
 
 * VM3-r2
 
-![img_24.png](img_24.png)
+![](img/img_24.png)
 
 #### Tiempos obtenidos realizando las pruebas con newman en cada maquina al tiempo
 
 * VM1-r1
 
-![img_25.png](img_25.png)
+![](img/img_25.png)
 
 * VM1-r2
 
@@ -317,44 +317,44 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 
 * VM2-r2
 
-![img_26.png](img_26.png)
+![](img/img_26.png)
 
 
 * VM3-r1
 
-![img_27.png](img_27.png)
+![](img/img_27.png)
 
 
 * VM3-r2
 
-![img_28.png](img_28.png)
+![](img/img_28.png)
 
 * VM4-r1
 
-![img_32.png](img_32.png)
+![](img/img_32.png)
 
 * VM4-r2
 
-![img_31.png](img_31.png)
+![](img/img_31.png)
 
 * VM4-r3
 
-![img_30.png](img_30.png)
+![](img/img_30.png)
 
 * VM4-r4
 
-![img_29.png](img_29.png)
+![](img/img_29.png)
 
 
 #### CPU
 
 * VM1
 
-![img_33.png](img_33.png)
+![](img/img_33.png)
 
 * VM2
 
-![img_34.png](img_34.png)
+![](img/img_34.png)
 
 * VM3
 
