@@ -97,6 +97,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 9. Ahora usaremos Postman para simular una carga concurrente a nuestro sistema. Siga estos pasos.
     * Instale newman con el comando `npm install newman -g`. Para conocer más de Newman consulte el siguiente [enlace](https://learning.getpostman.com/docs/postman/collection-runs/command-line-integration-with-newman/).
+   ![img.png](img.png)
     * Diríjase hasta la ruta `FibonacciApp/postman` en una maquina diferente a la VM.
     * Para el archivo `[ARSW_LOAD-BALANCING_AZURE].postman_environment.json` cambie el valor del parámetro `VM1` para que coincida con la IP de su VM.
     * Ejecute el siguiente comando.
@@ -111,7 +112,50 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 ![Imágen 3](images/part1/part1-vm-resize.png)
 
 11. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
+    ![img_1.png](p1.png)
+
+* 1000000
+
+![img_2.png](p2.png)
+
+* 1010000
+
+![img_3.png](P3.png)
+
+* 1020000
+
+![img_4.png](p4.png)
+
+* 1030000
+
+![img_5.png](p5.png)
+
+* 1040000
+
+![img_6.png](p6.png)
+
+* 1050000
+
+![img_7.png](p7.png)
+
+* 1060000
+
+![img_8.png](p8.png)
+
+* 1070000
+
+![img_9.png](p9.png)
+
+* 1080000
+
+![img_10.png](p10.png)
+
+* 1090000
+
+![img_11.png](p11.png)
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
+
+**RTA:** Se puede Considerar que si cumple un requerimiento funcional, debido a que se ve una mejora de tiempo considerable, de igual manera hubo disminución en los errores de scripts en postman de 5 a 4.
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
 
 **Preguntas**
@@ -140,21 +184,34 @@ Antes de continuar puede eliminar el grupo de recursos anterior para evitar gast
 
 ![](images/part2/part2-lb-create.png)
 
+![img_12.png](p12.png)
+
+![img_13.png](p13.png)
+
+
 2. A continuación cree un *Backend Pool*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-bp-create.png)
+
+![img_14.png](p14.png)
 
 3. A continuación cree un *Health Probe*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-hp-create.png)
 
+![img_15.png](p15.png)
+
 4. A continuación cree un *Load Balancing Rule*, guiese con la siguiente imágen.
 
 ![](images/part2/part2-lb-lbr-create.png)
 
+![img_16.png](p16.png)
+
 5. Cree una *Virtual Network* dentro del grupo de recursos, guiese con la siguiente imágen.
 
 ![](images/part2/part2-vn-create.png)
+
+![img_17.png](p17.png)
 
 #### Crear las maquinas virtuales (Nodos)
 
@@ -194,6 +251,8 @@ forever start FibonacciApp.js
 
 Realice este proceso para las 3 VMs, por ahora lo haremos a mano una por una, sin embargo es importante que usted sepa que existen herramientas para aumatizar este proceso, entre ellas encontramos Azure Resource Manager, OsDisk Images, Terraform con Vagrant y Paker, Puppet, Ansible entre otras.
 
+![img_18.png](p18.png)
+
 #### Probar el resultado final de nuestra infraestructura
 
 1. Porsupuesto el endpoint de acceso a nuestro sistema será la IP pública del balanceador de carga, primero verifiquemos que los servicios básicos están funcionando, consuma los siguientes recursos:
@@ -213,6 +272,109 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
 ```
+
+### RESULTADOS
+
+* VM1-r1
+
+![img_19.png](img_19.png)
+
+* VM1-r2
+
+![img_20.png](img_20.png)
+
+* VM2-r1
+
+![img_21.png](img_21.png)
+
+* VM2-r2
+
+![img_22.png](img_22.png)
+
+* VM3-r1
+
+![img_23.png](img_23.png)
+
+* VM3-r2
+
+![img_24.png](img_24.png)
+
+#### Tiempos obtenidos realizando las pruebas con newman en cada maquina al tiempo
+
+* VM1-r1
+
+![img_25.png](img_25.png)
+
+* VM1-r2
+
+![img_1.png](img_1.png)
+
+
+* VM2-r1
+
+![img_2.png](img_2.png)
+
+
+* VM2-r2
+
+![img_26.png](img_26.png)
+
+
+* VM3-r1
+
+![img_27.png](img_27.png)
+
+
+* VM3-r2
+
+![img_28.png](img_28.png)
+
+* VM4-r1
+
+![img_32.png](img_32.png)
+
+* VM4-r2
+
+![img_31.png](img_31.png)
+
+* VM4-r3
+
+![img_30.png](img_30.png)
+
+* VM4-r4
+
+![img_29.png](img_29.png)
+
+
+#### CPU
+
+* VM1
+
+![img_33.png](img_33.png)
+
+* VM2
+
+![img_34.png](img_34.png)
+
+* VM3
+
+![](img/img_35.png)
+
+* VM4
+
+![](img/img_36.png)
+
+
+
+
+
+
+
+
+
+
+
+
 
 **Preguntas**
 
