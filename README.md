@@ -161,18 +161,33 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 **Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
+**RTA:** Se crean cuatro recursos que son: Virtual Machine, Resource Group, Public IP address y Private IP address.
 2. ¿Brevemente describa para qué sirve cada recurso?
+**RTA:**
+    * Virtual Machine: Es un software que simula a un computador real dentro de otro equipo.
+    * Resource Group: Es un contenedor que contiene recursos relacionados para una solución de Azure.
+    * Public IP address: Las direcciones IP públicas permiten que los recursos de Internet se comuniquen de forma entrante a los recursos de Azure.
+    * IP privada: Permiten la comunicación entre recursos en Azure.
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
+**RTA:** Esto se debe a que al cerrarse la conexión se terminaran también los procesos que se estén ejecutando en esa conexión. Porque por defecto solo esta abierto el puerto 22 por lo que las conexiones desde el resto de puertos no son aceptadas.
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
+**RTA:** Los altos tiempos pueden deberse a la alta complejidad del ejecício Fibonacci o también a que al ser una maquina virtual sus recursos son limitados.
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+**RTA:** Se consume esta cantidad de CPU debido a que cada nuevo número que se desea calcular en Fibonacci aumenta en tamaño, además, deben tenerse en cuenta los anteriores, por lo que cada iteración requiere almacenamiento. 
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
     * Si hubo fallos documentelos y explique.
+      Las fallas se debieron presentar por timeouts debido a lo demorado que fue el cálculo.
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
+**RTA:** B1ls es la máquina más basica que tien azure, la cual solo cuenta con 1 vcpu y 0.5 Gb de memoria RAM, por otro lado B2ms, posee mayor capacidad, contando con 2vcpu y 8 Gb de menoria RAM, que le permite manejar de una manera más adecuada los recursos, con la capacidad de usar una mayor cantidad de entradas y obtener una mejor disponibilidad en comparación a la B1ls.
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
+**RTA:** Aumentar el tamaño por lo tanto la capacidad de la VM sí ayudaría a disminuir tiempos de cálculode cada iteración Fibonacci, sin embargo esto no garantizaría un 100% de exito en cada petición.
 9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
+**RTA:** En temas de infraestructura no se encontraron desventajas, quizá se podría pensar en sobre costos, pero no mucho más.
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
+**RTA:** Sí se encontró una gran mejora en rendimiento, por lo tanto en consumo de CPU, ya que para l máquina virtual era más sencillo y rápido calcular cada iteración.
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
+**RTA:**
 
 ### Parte 2 - Escalabilidad horizontal
 
@@ -379,14 +394,36 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 **Preguntas**
 
 * ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
+**RTA:** 
+  * Actualmente existen dos tipos de balanceo de cargas, por un lado tenemos el balanceo de carga público, el cual se encarga de proveer conexiones de salida para las maquinas virtuales que conforman el backend, esto es posible mediante la traducción de direcciones IP privadas a públicas, y por otro lado tenemos el balanceador de cargas interno o privado, el cual se encarga de balacear las cargas dentro de la red interna de nuestra red virtual.
+  * SKU en microsoft azure, son los niveles de recursos que están disponibles para los clientes dependiendo de la tarea que se va a realizar, estos se clasifican en cuatro categorias las cuales son: Free, Basic, Standard y Storage Optimized. Cada una de ellas, determina el monto que el cliente debe pagar a la hora de usar el servicio.
+  * Cada categoría brinda un nivel de capacidad diferente y se eligen dependiendo del tamaño del proyecto que se quiere desplegar.
+  * El balanceador de carga requiere una ip pública, porque es ahí donde llegan todas las peticiones que se realizan, de ahí se distribuye a las demás máquinas para que realicen en cálculo y así retornar la respuesta.
 * ¿Cuál es el propósito del *Backend Pool*?
+**RTA:** Conjunto de recursos de backend que se usan para administrar el tráfico entrante en una aplicación web o un servicio de aplicaciones. Este equilibra la carga del tráfico de red entrante para garantizar que se distribuya de manera uniforme y eficiente entre los recursos.
 * ¿Cuál es el propósito del *Health Probe*?
+**RTA:** Funcionalidad de administración de tráfico que se utiliza para monitorear la disponibilidad y el rendimiento de los recursos de backend. El propósito principal del Health Probe es asegurarse de que los recursos de backend que se utilizan en una aplicación web o un servicio de aplicaciones estén disponibles y funcionando correctamente.
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
+**RTA:** 
+  * Una Load Balancing Rule especifica cómo se debe distribuir y equilibrar el tráfico entrante a un conjunto de recursos de backend. 
+  * Existen diferentes tipos de sesiones persistentes, como la persistencia de IP, la persistencia de cookie y la persistencia SSL.
+  * Si esta se utiliza de forma excesiva puede resultar en un overload en uno o varios de los recursos del backend al mismo tiempo que otros recursos pueden estar en estado de underload.
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
+**RTA:**
+  * Una Virtual Network es es una representación de una red de área local (LAN) en la nube que se puede utilizar para alojar recursos, como máquinas virtuales, bases de datos y aplicaciones web.
+  * Una subnet es un subconjunto de direcciones IP de una Virtual Network que se utiliza para organizar y aislar los recursos en una red virtual.
+  * Los address espace sirven para definir el rango global de direcciones IP que se pueden utilizar en la Virtual Network.
+  * Los address espace sirven para especificar el rango de direcciones IP que se pueden asignar a una subred específica.
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
+**RTA:** Availability Zone es una oferta que se realiza para tener alta disponibilidad ya que potege sus aplicaciones y datos a fallas que puedan ocurrir. las zonas de disponibilidad son ubicaicones ficticias dentro de una region en azure.
 * ¿Cuál es el propósito del *Network Security Group*?
+**RTA:** Su propósito es proporcionar un conjunto de reglas de seguridad de red que se aplican a los recursos de Azure dentro de una Virtual Network. Un NSG funciona como un firewall virtual, permitiendo o denegando el tráfico de red entrante o saliente basado en las reglas de seguridad definidas.
 * Informe de newman 1 (Punto 2)
+**RTA:** Como lo pudimos ver en la documentación, el sistema se demoró en responder las peticiones en promedio 2 min 53 seg, de las cuales, solo se presentaban entre 1 y 3 fallas. En comparación con el sistema de 3 máquinas, este se demoró menos tiempo en retornar los resultados al cliente.
 * Presente el Diagrama de Despliegue de la solución.
+**RTA:**
+![](img/img_37.png)
+
 
 
 
